@@ -202,3 +202,12 @@ resource "azurerm_linux_virtual_machine" "test_vm" {
     version   = "latest"
   }
 }
+
+# Module: test-vnet (azurerm_virtual_network)
+module "test-vnet" {
+  source = "./modules/azure-virtual-network"
+
+  name = "test-vnet"
+  location = "centralus"
+  resource_group_name = "project-rg-7d6bab"
+}
