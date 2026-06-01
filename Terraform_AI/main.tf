@@ -141,6 +141,24 @@ resource "azurerm_public_ip" "test_pip" {
   sku                 = "Standard"
 }
 
+resource "azurerm_network_security_group" "test_nsg" {
+  name                = "test-nsg"
+  location            = var.location
+  resource_group_name = module.main_rg.name
+
+  security_rule {
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
 resource "azurerm_network_interface" "test_nic" {
   name                = "test-nic"
   location            = var.location
@@ -152,6 +170,11 @@ resource "azurerm_network_interface" "test_nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.test_pip.id
   }
+}
+
+resource "azurerm_network_interface_security_group_association" "test_nsg_assoc" {
+  network_interface_id      = azurerm_network_interface.test_nic.id
+  network_security_group_id = azurerm_network_security_group.test_nsg.id
 }
 
 resource "azurerm_linux_virtual_machine" "test_vm" {
