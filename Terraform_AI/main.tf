@@ -110,7 +110,9 @@ module "express_backend_app" {
     version  = var.express_backend_node_version
   }
   service_plan_id = module.shared_plan.id
-  tags            = var.tags
+  tags            = merge(var.tags, {
+    test-vnet = "governance-required"
+  })
 }
 
 
