@@ -181,7 +181,7 @@ resource "azurerm_linux_virtual_machine" "test_vm" {
   name                            = "test-stress-vm"
   resource_group_name             = module.main_rg.name
   location                        = var.location
-  size                            = "Standard_B2s"
+  size                            = "Standard_B2ms"
   admin_username                  = "azureuser"
   admin_password                  = "TestP@ssw0rd123!"
   disable_password_authentication = false
