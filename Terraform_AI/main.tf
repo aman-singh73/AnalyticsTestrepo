@@ -202,3 +202,15 @@ resource "azurerm_linux_virtual_machine" "test_vm" {
     version   = "latest"
   }
 }
+
+# Module: test-stress-vm_OsDisk_1_b5b48b3c34f746bca1019d8a5f363408 (azurerm_managed_disk)
+module "test-stress-vm_OsDisk_1_b5b48b3c34f746bca1019d8a5f363408" {
+  source = "./modules/azure-managed-disk"
+
+  name = "test-stress-vm_OsDisk_1_b5b48b3c34f746bca1019d8a5f363408"
+  location = "centralus"
+  resource_group_name = "PROJECT-RG-7D6BAB"
+  storage_account_type = "Standard_LRS"
+  create_option = "Empty"
+  disk_size_gb = 128
+}
