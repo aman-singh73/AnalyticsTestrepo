@@ -67,7 +67,12 @@ module "shared_plan" {
     size     = "B1"
     capacity = 1
   }
-  tags = var.tags
+  tags = merge(var.tags, {
+    cost_center = "governance-required"
+    environment = "governance-required"
+    owner = "governance-required"
+    project = "governance-required"
+  })
 }
 
 # ========================================
@@ -87,7 +92,12 @@ module "mongodb_database_cosmos" {
   name                            = "project-cosmos-269686"
   offer_type                      = "Standard"
   resource_group_name             = module.main_rg.name
-  tags                            = var.tags
+  tags                            = merge(var.tags, {
+    cost_center = "governance-required"
+    environment = "governance-required"
+    owner = "governance-required"
+    project = "governance-required"
+  })
 }
 
 # ========================================
@@ -110,7 +120,13 @@ module "express_backend_app" {
     version  = var.express_backend_node_version
   }
   service_plan_id = module.shared_plan.id
-  tags            = var.tags
+  tags            = merge(var.tags, {
+    cost_center = "governance-required"
+    environment = "governance-required"
+    owner = "governance-required"
+    project = "governance-required"
+    resulting in a tag completeness of 0% = "governance-required"
+  })
 }
 
 
